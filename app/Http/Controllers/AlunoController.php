@@ -14,7 +14,11 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        //
+        $alunos = Aluno::get();
+        
+        return view('alunos.home', [
+            'alunos' => $alunos
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        //
+        return view('alunos.create');
     }
 
     /**
@@ -35,7 +39,11 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->except('_token');
+
+        Aluno::create($dados);
+
+        return redirect()->route('alunos.index');
     }
 
     /**
@@ -52,12 +60,16 @@ class AlunoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aluno $aluno)
+    public function edit(int $id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+
+        return view('alunos.edit', [
+            'aluno' => $aluno
+        ]);
     }
 
     /**
@@ -67,9 +79,15 @@ class AlunoController extends Controller
      * @param  \App\Models\Aluno  $aluno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aluno $aluno)
+    public function update(Request $request, int $id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+
+        $dados = $request->except(['_token', '_method']);
+
+        $aluno->update($dados);
+
+        return redirect()->route('alunos.index');
     }
 
     /**
@@ -78,8 +96,13 @@ class AlunoController extends Controller
      * @param  \App\Models\Aluno  $aluno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aluno $aluno)
+    public function destroy(int $id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+
+        $aluno->delete();
+
+        return redirect()->route('alunos.index');
+
     }
 }

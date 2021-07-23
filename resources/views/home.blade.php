@@ -1,9 +1,9 @@
 @extends('layout')
 
+@section('titulo', 'Gestão Escolar')
+
 @section('content')
 
-<div class="container">
- 
   <div class="text-center">
     <div class="card-body">
       <h1 class="card-title">Gestão Escolar</h1>
@@ -13,6 +13,5 @@
       </div>
     </div>
   </div>
-</div>
 
 @endsection
