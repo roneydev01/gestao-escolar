@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h3>Lista de Alunos</h3>
+<p class="h2">Lista de Alunos</p>
 
   <form method="GET" action="{{route('alunos.index')}}" class="row g-3 mb-3">
     <div class="col">

@@ -42,7 +42,7 @@
             </nav>
         </header>
         <!-- header-end -->
-        <div class="container">
+        <div class="container bg-light border border-light">
           @yield('content')
         </div>
 
