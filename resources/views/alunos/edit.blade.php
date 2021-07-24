@@ -9,7 +9,7 @@
      <a href="{{route('alunos.index')}}" class="btn btn-outline-secondary" role="button">Voltar</a>
   </div>
 
-  <form method="POST" action="{{route('alunos.update', $aluno)}}" class="row g-3>
+  <form method="POST" action="{{route('alunos.update', $aluno)}}" class="row g-3">
     @method('PUT')
     
     @include('alunos._form')

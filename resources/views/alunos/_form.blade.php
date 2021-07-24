@@ -1,7 +1,7 @@
 @csrf
   <div class="mb-2 col-md-12">
     <label for="nome" class="form-label">Nome Completo</label>
-    <input type="text" value="{{ @$aluno->nome }}" class="form-control" id="nome" name="nome" maxlength="100">
+    <input type="text" value="{{ @$aluno->nome }}" class="form-control" id="nome" name="nome" required maxlength="100">
   </div>
   <div class="mb-2 col-md-12">
     <label for="email" class="form-label">Email</label>

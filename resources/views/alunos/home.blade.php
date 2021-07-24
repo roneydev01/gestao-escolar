@@ -39,7 +39,7 @@
           <tr>
             <th scope="row">{{$aluno->id}}</th>
             <td>{{$aluno->nome}}</td>
-            <td>{{$aluno->telefone}}</td>
+            <td>{{ \Clemdesign\PhpMask\Mask::apply($aluno->telefone, '(00) 00000-0000')}}</td>
             <td>{{$aluno->email}}</td>
             <td>
               <a href="{{route('alunos.edit', $aluno)}}" class="btn btn-success">Editar</a>

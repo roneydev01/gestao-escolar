@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlunoRequest;
 use App\Models\Aluno;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Lista os Alunos
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function index(Request $request)
     {
@@ -33,9 +34,9 @@ class AlunoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Mostra oo formulário de criação
+     * 
+     * @return void 
      */
     public function create()
     {
@@ -43,14 +44,17 @@ class AlunoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Cria um Aluno no DB
+     * 
+     * @param Request $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(AlunoRequest $request)
     {
         $dados = $request->except('_token');
+
+        //Remove caracteres das mascaras
+        $dados['telefone'] = $this->removeMask($dados['telefone']);
 
         Aluno::create($dados);
 
@@ -69,10 +73,10 @@ class AlunoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  Integer $id
-     * @return \Illuminate\Http\Response
+     * Mostra o formulário de edição populado
+     * 
+     * @param Integer $id
+     * @return void
      */
     public function edit(int $id)
     {
@@ -84,17 +88,21 @@ class AlunoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aluno  $aluno
-     * @return \Illuminate\Http\Response
+     * Atualiza um Aluno no DB
+     * 
+     * @param Integer $id
+     * @param Request $request
+     * @return void
      */
-    public function update(Request $request, int $id)
+    public function update(AlunoRequest $request, int $id)
     {
         $aluno = Aluno::findOrFail($id);
 
         $dados = $request->except(['_token', '_method']);
+
+         //Remove caracteres das mascaras
+        $dados['telefone'] = $this->removeMask($dados['telefone']);
+
 
         $aluno->update($dados);
 
@@ -102,10 +110,10 @@ class AlunoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Aluno  $aluno
-     * @return \Illuminate\Http\Response
+     * Deleta um Aluno do DB
+     * 
+     * @param Integer $id
+     * @return void
      */
     public function destroy(int $id)
     {
@@ -115,5 +123,16 @@ class AlunoController extends Controller
 
         return redirect()->route('alunos.index');
 
+    }
+
+    /**
+     * Remove os caracteres das mascaras cep e telefone
+     * 
+     * @param string $data
+     * @return string
+     */
+    protected function removeMask(string $data)
+    {
+        return $data = str_replace(['.','-','(',')',' '], '',$data);
     }
 }
