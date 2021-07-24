@@ -35,7 +35,7 @@
                                 <a class="nav-link" href="#">Turmas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Escola</a>
+                                <a class="nav-link" href="{{ route('escolas.index') }}">Escolas</a>
                             </li>
                         </ul>
                     </div>
@@ -48,6 +48,7 @@
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
+                        <h5><i class="icon fas fa-ban"></i> Ops! Erro encontrado.</h5>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
