@@ -46,13 +46,20 @@
         <div class="container bg-light border border-light">
             <!-- Mensagens de erros -->
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="alert alert-danger my-3">
                     <ul>
                         <h5><i class="icon fas fa-ban"></i> Ops! Erro encontrado.</h5>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
+                </div>
+            @endif
+
+            <!-- Mensagens de sucesso -->
+            @if (session('msg'))
+                <div class="alert alert-success my-3" role="alert">
+                   {{ session('msg') }}
                 </div>
             @endif
 

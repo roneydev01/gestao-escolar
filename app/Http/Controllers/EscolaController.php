@@ -45,7 +45,7 @@ class EscolaController extends Controller
     /**
      * Cria uma Escola no DB
      * 
-     * @param EscolaRequest $request
+     * @param Request $request
      * @return void
      */
     public function store(EscolaRequest $request)
@@ -57,7 +57,7 @@ class EscolaController extends Controller
 
         Escola::create($dados);
 
-        return redirect()->route('escolas.index');
+        return redirect()->route('escolas.index')->with('msg','Escola adicionada com sucesso!');
     }
 
     /**
@@ -105,7 +105,7 @@ class EscolaController extends Controller
 
         $escola->update($dados);
 
-        return redirect()->route('escolas.index');
+        return redirect()->route('escolas.index')->with('msg','Dados atualizados com sucesso!');
     }
 
     /**
@@ -120,7 +120,7 @@ class EscolaController extends Controller
 
         $escola->delete();
 
-        return redirect()->route('escolas.index');
+        return redirect()->route('escolas.index')->with('msg','Escola excluída com sucesso!');
     }
 
     /**

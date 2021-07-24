@@ -58,7 +58,7 @@ class AlunoController extends Controller
 
         Aluno::create($dados);
 
-        return redirect()->route('alunos.index');
+        return redirect()->route('alunos.index')->with('msg','Aluno adicionado com sucesso!');
     }
 
     /**
@@ -106,11 +106,11 @@ class AlunoController extends Controller
 
         $aluno->update($dados);
 
-        return redirect()->route('alunos.index');
+        return redirect()->route('alunos.index')->with('msg','Dados atualizados com sucesso!');
     }
 
     /**
-     * Deleta um Aluno do DB
+     * Deleta um aluno do DB
      * 
      * @param Integer $id
      * @return void
@@ -121,7 +121,7 @@ class AlunoController extends Controller
 
         $aluno->delete();
 
-        return redirect()->route('alunos.index');
+        return redirect()->route('alunos.index')->with('msg','Aluno excluído com sucesso!');
 
     }
 
