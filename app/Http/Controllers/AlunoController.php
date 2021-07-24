@@ -12,13 +12,24 @@ class AlunoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alunos = Aluno::get();
+        
+        $busca = $request->get('search');
+
+        if ($busca) {
+            $alunos = Aluno::where([
+               ['nome', 'like', "%{$busca}%"]
+            ])
+            ->paginate(10)
+            ->withQueryString();
+        }else{
+            $alunos = Aluno::paginate(10); 
+        }
         
         return view('alunos.home', [
             'alunos' => $alunos
-        ]);
+        ])->with('busca', $busca);
     }
 
     /**

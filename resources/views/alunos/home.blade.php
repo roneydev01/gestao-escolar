@@ -6,10 +6,9 @@
 
 <h3>Lista de Alunos</h3>
 
-  <form method="POST" action="" class="row g-3 mb-3">
-    @csrf
+  <form method="GET" action="{{route('alunos.index')}}" class="row g-3 mb-3">
     <div class="col">
-      <input type="search" class="form-control" id ="buscar" name = "buscar" placeholder="Buscar Alunos" aria-label="Search">
+      <input type="search" class="form-control" id ="search" name = "search" value="{{$busca}}" placeholder="Buscar Alunos" aria-label="Search">
     </div>
     <div class="col">
       <button class="btn btn-outline-primary" type="submit">Buscar</button>
@@ -27,27 +26,39 @@
       </tr>
     </thead>
     <tbody>
-      @forelse ($alunos as $aluno)
+      @if($busca && count($alunos) <= 0 )
         <tr>
-          <th scope="row">{{$aluno->id}}</th>
-          <td>{{$aluno->nome}}</td>
-          <td>{{$aluno->telefone}}</td>
-          <td>{{$aluno->email}}</td>
-          <td>
-            <a href="{{route('alunos.edit', $aluno)}}" class="btn btn-success">Editar</a>
-            <a href="{{route('alunos.destroy', $aluno)}}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
-          </td>
+          <th ></th>
+          <td>Nenhum registro encontrado.</td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
-        @empty
+      @else
+        @forelse ($alunos as $aluno)
           <tr>
-            <th ></th>
-            <td>Nenhum registro cadastrado.</td>
-            <td></td>
-            <td></td>
+            <th scope="row">{{$aluno->id}}</th>
+            <td>{{$aluno->nome}}</td>
+            <td>{{$aluno->telefone}}</td>
+            <td>{{$aluno->email}}</td>
+            <td>
+              <a href="{{route('alunos.edit', $aluno)}}" class="btn btn-success">Editar</a>
+              <a href="{{route('alunos.destroy', $aluno)}}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </td>
           </tr>
-      @endforelse
+          @empty
+            <tr>
+              <th ></th>
+              <td>Nenhum registro cadastrado.</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+        @endforelse
+      @endif
     </tbody>
   </table>
+  {{$alunos->links()}}
   <a href="{{route('alunos.create')}}" class="btn btn-primary" role="button">Novo aluno</a>
 
 @endsection
