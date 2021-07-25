@@ -2,40 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Escola;
 use App\Models\Turma;
 use Illuminate\Http\Request;
 
 class TurmaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Lista as Turmas
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $busca = $request->get('filter');
+
+        if ($busca) {
+            $turmas = Turma::where([
+               ['nivel', '=', "{$busca}"]
+            ])
+            ->paginate(10)
+            ->withQueryString();
+        }else{
+            $turmas = Turma::paginate(10); 
+        }
+        
+        return view('turmas.home', [
+            'turmas' => $turmas
+        ])->with('busca', $busca);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Mostra o formulário de criação com as lista de Escolas
+     * 
+     * @return void 
      */
     public function create()
     {
-        //
+        $escolas = Escola::get();
+
+        return view('turmas.create',[
+            'escolas'=> $escolas
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Cria uma Escola no DB
+     * 
+     * @param Request $request
+     * @return void
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->except('_token');
+
+        Turma::create($dados);
+
+        return redirect()->route('turmas.index')->with('msg','Turma adicionada com sucesso!');
     }
 
     /**
@@ -50,36 +73,52 @@ class TurmaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
+     * Mostra o formulário de edição populado
+     * 
+     * @param Integer $id
+     * @return void
      */
-    public function edit(Turma $turma)
+    public function edit(int $id)
     {
-        //
+        $turma = Turma::findOrFail($id);
+        $escolas = Escola::get();
+
+        return view('turmas.edit', [
+            'turma' => $turma,
+            'escolas'=> $escolas
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
+     * Atualiza uma Turma no DB
+     * 
+     * @param Integer $id
+     * @param Request $request
+     * @return void
      */
-    public function update(Request $request, Turma $turma)
+    public function update(Request $request, int $id)
     {
-        //
+        $turma = Turma::findOrFail($id);
+
+        $dados = $request->except(['_token', '_method']);
+
+        $turma->update($dados);
+
+        return redirect()->route('turmas.index')->with('msg','Dados atualizados com sucesso!');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
+     * Deleta uma Turma do DB
+     * 
+     * @param Integer $id
+     * @return void
      */
-    public function destroy(Turma $turma)
+    public function destroy(int $id)
     {
-        //
+        $turma = Turma::findOrFail($id);
+
+        $turma->delete();
+
+        return redirect()->route('turmas.index')->with('msg','Turma excluída com sucesso!');
     }
 }

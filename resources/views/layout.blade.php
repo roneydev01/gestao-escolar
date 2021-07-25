@@ -29,13 +29,13 @@
                                 <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('escolas.index') }}">Escolas</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('alunos.index') }}">Alunos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Turmas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('escolas.index') }}">Escolas</a>
+                                <a class="nav-link" href="{{ route('turmas.index') }}">Turmas</a>
                             </li>
                         </ul>
                     </div>

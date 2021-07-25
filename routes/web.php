@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\EscolaController;
+use App\Http\Controllers\TurmaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,13 @@ Route::prefix('escolas')->group(function(){
     Route::get('/{id}/edit', [EscolaController::class, 'edit'])->name('escolas.edit');
     Route::put('/{id}', [EscolaController::class, 'update'])->name('escolas.update');
     Route::get('/{id}', [EscolaController::class, 'destroy'])->name('escolas.destroy');
+});
+
+Route::prefix('turmas')->group(function(){
+    Route::get('/', [TurmaController::class, 'index'])->name('turmas.index');
+    Route::get('/create', [TurmaController::class, 'create'])->name('turmas.create');
+    Route::post('/', [TurmaController::class, 'store'])->name('turmas.store');
+    Route::get('/{id}/edit', [TurmaController::class, 'edit'])->name('turmas.edit');
+    Route::put('/{id}', [TurmaController::class, 'update'])->name('turmas.update');
+    Route::get('/{id}', [TurmaController::class, 'destroy'])->name('turmas.destroy');
 });
