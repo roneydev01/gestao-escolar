@@ -16,6 +16,8 @@ class AlunoController extends Controller
     public function index(Request $request)
     {
         
+        $total = Aluno::count();
+
         $busca = $request->get('search');
 
         if ($busca) {
@@ -29,7 +31,8 @@ class AlunoController extends Controller
         }
         
         return view('alunos.home', [
-            'alunos' => $alunos
+            'alunos' => $alunos,
+            'total' => $total,
         ])->with('busca', $busca);
     }
 

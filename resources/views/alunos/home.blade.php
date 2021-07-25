@@ -6,14 +6,27 @@
 
 <p class="h2">Lista de Alunos</p>
 
-  <form method="GET" action="{{route('alunos.index')}}" class="row g-3 mb-3">
-    <div class="col">
-      <input type="search" class="form-control" id ="search" name = "search" value="{{$busca}}" placeholder="Buscar Alunos" aria-label="Search">
+  <div class="container">
+   <div class="row justify-content-between">
+     <div class="col-9">
+        <form method="GET" action="{{route('alunos.index')}}" class="row" >
+          <div class="col">
+            <input type="search" class="form-control" id ="search" name = "search" value="{{$busca}}" placeholder="Buscar Alunos" aria-label="Search">
+          </div>
+          <div class="col">
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
+          </div>
+        </form>
+     </div>
+      <div class="col-3">
+          <div class="card text-dark bg-info mb-3" style="width: 100%;">
+            <div class="card-body">
+              <h6 class="card-title">Total de Alunos: {{$total}}</h6>
+            </div>
+          </div>
+      </div>
     </div>
-    <div class="col">
-      <button class="btn btn-outline-primary" type="submit">Buscar</button>
-    </div>
-  </form>
+  </div>
 
   <table class="table table-striped table-hover">
       <thead class="table-primary">
