@@ -1,5 +1,6 @@
 @csrf
   <div class="mb-2 col-md-12">
+    <label for="escola" class="form-label">Escola*</label>
     <select id="escola_id" name="escola_id" class="form-select" required >
       <option value="">Selecione a Escola</option>
       @foreach ($escolas as $escola)
