@@ -17,11 +17,11 @@ Clonar Projeto
   git@github.com:roneydev01/gestao-escolar.git
 ```
 
-## Cria o banco de dados
+## Criar o banco de dados
 
-MySql
+-   MySql
 
-## Cria e configura arquivo .env
+## Criar e configura arquivo .env
 
 ```bash
   cp .env.example .env
@@ -29,12 +29,12 @@ MySql
 
 Variaveis de ambiente do .env
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=db_name
-DB_USERNAME=root
-DB_PASSWORD=
+-   DB_CONNECTION=mysql
+-   DB_HOST=127.0.0.1
+-   DB_PORT=3306
+-   DB_DATABASE=db_name
+-   DB_USERNAME=root
+-   DB_PASSWORD=
 
 ## Gerar a key do projeto
 
@@ -42,19 +42,19 @@ DB_PASSWORD=
   php artisan key:generate
 ```
 
-## Instala as dependências do projeto
+## Instalar as dependências do projeto
 
 ```bash
   composer install
 ```
 
-## Cria as tabelas
+## Criar as tabelas
 
 ```bash
   php artisan migrate
 ```
 
-## Popula as tabelas
+## Popular as tabelas
 
 Será populado 15 registos por execução
 
@@ -62,13 +62,13 @@ Será populado 15 registos por execução
   php artisan db:seed
 ```
 
-## Gera os recursos JavaScript e CSS
+## Gerar os recursos JavaScript e CSS
 
 ```bash
   npm run dev
 ```
 
-## Inicial o Servidor do Laravel
+## Inicia o Servidor do Laravel
 
 ```bash
   php artisan serve
@@ -76,7 +76,7 @@ Será populado 15 registos por execução
 
 ## Endpoints API
 
-API REST disponibiliza as funcionalidade baseada de na rota
+API disponibiliza as funcionalidade baseada na rota:
 
 ```bash
   localhost:8000/api
@@ -142,5 +142,5 @@ API REST disponibiliza as funcionalidade baseada de na rota
 
 ## Documantação
 
-[Laravel](https://laravel.com/)
-[Bootstrap](https://getbootstrap.com/)
+-   [Laravel](https://laravel.com/)
+-   [Bootstrap](https://getbootstrap.com/)
